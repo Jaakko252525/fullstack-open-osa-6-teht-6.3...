@@ -30,7 +30,6 @@ const AnecdoteList = () => {
 
 
 
-
   return (
     <div>
       {anecdotes.map(anecdote => (

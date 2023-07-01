@@ -8,7 +8,7 @@ const Filter = () => {
     const [inputText, setInputText] = useState('')
     const [render, setRender] = useState(false)
   
-    const anecdotes = useSelector(state => state.withoutFilter)
+    const anecdotes = useSelector(state => state.filter)
 
     const dispatch = useDispatch()
 
@@ -32,6 +32,7 @@ const Filter = () => {
       marginBottom: 10
     }
 
+    console.log('these are anecdotes in filter', anecdotes)
 
 
   
@@ -39,6 +40,17 @@ const Filter = () => {
       <div style={style}>
         filter <input onChange={handleChange} />
         
+
+      <div>
+      {anecdotes.map(anecdote => (
+        <div key={anecdote.id}>
+          <div>{anecdote.content}</div>
+          <div>
+            has {anecdote.votes}
+          </div>
+        </div>
+      ))}
+        </div>  
       </div>
 
 
