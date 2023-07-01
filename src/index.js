@@ -4,20 +4,25 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import App from './App'
 import reducer from './reducers/anecdoteReducer'
+import { configureStore } from '@reduxjs/toolkit'
 
 import filterReducer from './reducers/filterReducer'
 
 import { asObject } from './reducers/anecdoteReducer'
 import { filterChange } from './reducers/filterReducer'
 
+import dick from './reducers/filterReducer'
 
 
-const combinedReducer = combineReducers({
-  withoutFilter: reducer,
-  filter: filterReducer
+
+const store = configureStore({
+  reducer: {
+    anecdotes: reducer,
+    filter: dick
+  }
+
+
 })
-
-const store = createStore(combinedReducer)
 
 console.log('state',store.getState())
 

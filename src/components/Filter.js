@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { filterReducer, filterChange } from "../reducers/filterReducer"
+import { filterChange } from "../reducers/filterReducer"
 import {  useDispatch, useSelector } from 'react-redux'
 
-
+import filterReducer, { filterAnecdotes } from '../reducers/filterReducer'
 
 const Filter = () => {
     const [inputText, setInputText] = useState('')
@@ -24,7 +24,7 @@ const Filter = () => {
 
         setInputText(event.target.value)
         // input-kentän arvo muuttujassa event.target.value
-        dispatch(filterChange(inputText))
+        dispatch(filterAnecdotes(inputText))
         //setting state for rendering
         setRender(true)
     }

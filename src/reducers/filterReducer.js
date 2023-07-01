@@ -1,4 +1,8 @@
 
+import { createSlice } from '@reduxjs/toolkit'
+
+
+
 
 const anecdotesAtStart = [
   'If it hurts, do it more often',
@@ -26,7 +30,52 @@ const puttingDefaultAnecdotes = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(puttingDefaultAnecdotes)
 
+// new reducer
 
+const filterSlice = createSlice(
+  {
+  name: 'filter',
+  initialState,
+  reducers: {
+    filterAnecdotes(state, action) {
+      const content = action.payload
+      state.push({
+        content,
+        id: getId(),
+      })
+
+      // function that checks if filter string in anecdote
+      const checkFilter = (anecdote) => {
+          
+        const array = []
+        if (anecdote.content.includes(action.payload)) {
+
+          const array_2 = array.concat(anecdote.content)
+          console.log('this array should only contain filter things',array_2)
+          return array_2
+        }
+
+
+      }
+
+
+      // return the array as state
+
+
+      return state.filter(checkFilter)
+    
+    },
+  
+  }
+  }
+  
+)
+
+export const { filterAnecdotes } = filterSlice.actions
+export default filterSlice.reducer
+
+
+/*
 const filterReducer = (state = initialState, action) => {
     console.log('ACTIONFilter: ', action)
     
@@ -80,5 +129,5 @@ export default filterReducer
 
 
 
-
+*/
 

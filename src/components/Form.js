@@ -4,6 +4,7 @@ import {  useDispatch } from 'react-redux'
 
 import { asObject } from '../reducers/anecdoteReducer'
 
+import anecdoteReducer, { createAnecdote } from '../reducers/anecdoteReducer'
 
 
 
@@ -25,8 +26,8 @@ const AnecdoteForm = ({formSubmitProp, valueProp }) => {
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log('siuuu', anecdoteText)
-        // sending inout text to asObject
-        dispatch(asObject(anecdoteText))
+        // sending input text to asObject
+        dispatch(createAnecdote(anecdoteText))
         //setting state for rendering
         setRender(true)
 

@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { voteAnecdote } from '../reducers/anecdoteReducer'
 
+import anecdoteReducer, { vote } from '../reducers/anecdoteReducer'
 
 
 const AnecdoteList = () => {
   const [render, setRender] = useState(false)
 
-  const anecdotes = useSelector(state => state.withoutFilter)
+  const anecdotes = useSelector(state => state.anecdotes)
   const dispatch = useDispatch()
 
   // if render state === true, then it renders screen
@@ -19,16 +20,16 @@ const AnecdoteList = () => {
   },[render])
 
 
-  const vote = (anecdote) => {
+  const voteFunc = (anecdote) => {
     console.log('anecdotes first',anecdotes)
     console.log('in vote', anecdote)
-    dispatch(voteAnecdote(anecdote))
+    dispatch(vote(anecdote))
 
     //setting state for rendering
     setRender(true)
   }
 
-
+  console.log('these are anecdotes', anecdotes)
 
   return (
     <div>
@@ -37,7 +38,7 @@ const AnecdoteList = () => {
           <div>{anecdote.content}</div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => vote(anecdote)}>vote</button>
+            <button onClick={() => voteFunc(anecdote)}>vote</button>
           </div>
         </div>
       ))}

@@ -1,4 +1,5 @@
 import { get } from "mongoose"
+import { createSlice } from '@reduxjs/toolkit'
 
 
 const anecdotesAtStart = [
@@ -54,6 +55,53 @@ export const asObject = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(puttingDefaultAnecdotes)
 
+
+// new reducer
+const anecdoteSlice = createSlice(
+  {
+  name: 'anecdotes',
+  initialState,
+  reducers: {
+    createAnecdote(state, action) {
+      const content = action.payload
+      state.push({
+        content,
+        id: getId(),
+        votes: 0
+      })
+    }, 
+    vote(state, action) {
+      const id = action.payload.id
+
+      const anecdoteThatGetsVoted = state.find(anecdote => anecdote.id === id)
+
+      console.log('this is anecdote', anecdoteThatGetsVoted)
+
+      console.log('anecdotes votes', JSON.parse(JSON.stringify(anecdoteThatGetsVoted.votes)))
+
+      const changedAnecdote = {
+        ...anecdoteThatGetsVoted,
+        votes: JSON.parse(JSON.stringify(anecdoteThatGetsVoted.votes)) + 1
+      }
+      console.log('state:',JSON.parse(JSON.stringify(state)))
+      return state.map(anecdote => 
+        anecdote.id !== id ? anecdote : changedAnecdote)
+    }
+  }
+})
+
+
+export const { createAnecdote, vote } = anecdoteSlice.actions
+export default anecdoteSlice.reducer
+
+
+
+
+
+
+
+
+/*
 const reducer = (state = initialState, action) => {
   console.log('ACTION: ', action)
   switch (action.type) {
@@ -93,8 +141,9 @@ const reducer = (state = initialState, action) => {
   }
 };
 
+
 export default reducer
 
-
+*/
 
 
