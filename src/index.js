@@ -3,31 +3,33 @@ import ReactDOM from 'react-dom/client'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import App from './App'
-import reducer from './reducers/anecdoteReducer'
+
 import { configureStore } from '@reduxjs/toolkit'
 
-import filterReducer from './reducers/filterReducer'
 
 import { asObject } from './reducers/anecdoteReducer'
 import { filterChange } from './reducers/filterReducer'
 
-import dick from './reducers/filterReducer'
+import filterReducer from './reducers/filterReducer'
 
-
+//importing anecdoteServices
+import anecdoteService from './services/anecdotes'
+import reducer, { setAnecdotes } from './reducers/anecdoteReducer'
 
 const store = configureStore({
   reducer: {
     anecdotes: reducer,
-    filter: dick
+    filter: filterReducer
   }
 
 
 })
 
-console.log('state',store.getState())
 
-// exporting store so filterReducer can use it!!
-//export default store
+anecdoteService.getAll().then(anecdotes =>
+  store.dispatch(setAnecdotes(anecdotes))
+  )
+
 
 
 
@@ -36,10 +38,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </Provider>
 )
-
-
-
-
 
 
 

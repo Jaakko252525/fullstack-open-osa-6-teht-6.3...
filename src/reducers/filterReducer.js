@@ -39,30 +39,33 @@ const filterSlice = createSlice(
   reducers: {
     filterAnecdotes(state, action) {
       const content = action.payload
-      state.push({
-        content,
-        id: getId(),
-      })
 
-      // function that checks if filter string in anecdote
-      const checkFilter = (anecdote) => {
-          
-        const array = []
-        if (anecdote.content.includes(action.payload)) {
 
-          const array_2 = array.concat(anecdote.content)
-          console.log('this array should only contain filter things',array_2)
-          return array_2
+      console.log('filter is:',action.payload )
+
+      console.log(JSON.parse(JSON.stringify(state)))
+      
+      const funcccc = (anecdote) => {
+        const content = anecdote.content
+
+        if (content.includes(action.payload)) {
+
+          console.log('contains!', content)
+          return anecdote.content
         }
+        else console.log('dont contain', content)
+
 
 
       }
 
 
-      // return the array as state
+      // check if initialState has the filter
+      const checkFilter = state.filter(anecdote => funcccc(anecdote))
 
+      console.log('checkFilter works??', JSON.parse(JSON.stringify(checkFilter)))
 
-      return state.filter(checkFilter)
+      return checkFilter
     
     },
   

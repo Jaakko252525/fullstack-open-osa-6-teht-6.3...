@@ -25,6 +25,7 @@ const Filter = () => {
         setInputText(event.target.value)
         // input-kentän arvo muuttujassa event.target.value
         dispatch(filterAnecdotes(inputText))
+        console.log('here??')
         //setting state for rendering
         setRender(true)
     }
