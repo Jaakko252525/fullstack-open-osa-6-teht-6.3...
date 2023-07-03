@@ -3,7 +3,7 @@
     {
       "content": "db json",
       "id": "47145",
-      "votes": 0
+      "votes": 22
     },
     {
       "content": "Adding manpower to a late software project makes it later!",
@@ -23,7 +23,7 @@
     {
       "content": "Premature optimization is the root of all evil.",
       "id": "25170",
-      "votes": 0
+      "votes": 6
     },
     {
       "content": "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
@@ -34,6 +34,25 @@
       "content": "toimiiko api?",
       "votes": 0,
       "id": 69
+    },
+    {
+      "content": "yyyyyyyyyyyyy",
+      "id": "78217",
+      "votes": 0
+    },
+    {
+      "content": "hey",
+      "id": "38295",
+      "votes": 1
+    },
+    {
+      "content": "helou",
+      "id": "75041",
+      "votes": 4
+    },
+    {
+      "1": "",
+      "id": "13596"
     }
   ]
 }

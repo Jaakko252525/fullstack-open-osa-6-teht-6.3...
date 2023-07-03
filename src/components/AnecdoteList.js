@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { voteAnecdote } from '../reducers/anecdoteReducer'
 
-import anecdoteReducer, { vote } from '../reducers/anecdoteReducer'
+import anecdoteService from '../services/anecdotes'
 
+import anecdoteReducer, { voteAnecdoteReducer } from '../reducers/anecdoteReducer'
 
 const AnecdoteList = () => {
   const [render, setRender] = useState(false)
@@ -22,9 +23,9 @@ const AnecdoteList = () => {
 
   const voteFunc = (anecdote) => {
     console.log('anecdotes first',anecdotes)
-    console.log('in vote', anecdote)
-    dispatch(vote(anecdote))
-
+    console.log('in voteFunc', anecdote)
+    dispatch(voteAnecdoteReducer(anecdote))
+    console.log('back votefFunc?')
     //setting state for rendering
     setRender(true)
   }

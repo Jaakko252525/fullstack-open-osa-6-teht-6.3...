@@ -11,14 +11,30 @@ const getAll = async () => {
 }
 
 const createNew = async (content) => {
-  const object = { content, votes: 0, id: 69 }
+  console.log('content in POST', content)
+  const object = content
   const response = await axios.post(baseUrl, object)
   return response.data
 }
 
+const changeAnecdote = async (anecdote) => {
 
 
-export default { getAll, createNew }
+  console.log('inside PUT in axios, this is anecdote', anecdote)
+
+  const newAnecdote = {
+    content: anecdote.content,
+    id: anecdote.id,
+    votes: anecdote.votes + 1
+  }
+  
+  // makig the PUT req
+  const response = await axios.put(baseUrl + '/' + anecdote.id, newAnecdote)
+
+  return response.data
+}
+
+export default { getAll, createNew, changeAnecdote }
 
 
 

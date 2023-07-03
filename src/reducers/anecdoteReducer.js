@@ -1,7 +1,7 @@
 import { get } from "mongoose"
 import { createSlice } from '@reduxjs/toolkit'
 
-
+import anecdoteService from '../services/anecdotes'
 
 export const voteAnecdote = (id) => {
   console.log('inside voteAnecdote!', )
@@ -51,16 +51,7 @@ const anecdoteSlice = createSlice(
   {
   name: 'anecdotes',
   initialState: [],
-  reducers: {
-    createAnecdote(state, action) {
-      const content = action.payload
-      state.push({
-        content,
-        id: getId(),
-        votes: 0
-      })
-    
-    }, 
+  reducers: { 
     vote(state, action) {
       const id = action.payload.id
 
@@ -88,13 +79,46 @@ const anecdoteSlice = createSlice(
 })
 
 
-export const { createAnecdote, vote, appendAnecdote, setAnecdotes } = anecdoteSlice.actions
+export const {  vote, appendAnecdote, setAnecdotes } = anecdoteSlice.actions
 export default anecdoteSlice.reducer
 
 
 
+export const createAnecdote = content => {
+
+  // making the object
+  const anec = {
+    content,
+    id: getId(),
+    votes: 0
+  }
+
+  return async dispatch => {
+    const newAnecdote = await anecdoteService.createNew(anec)
+    dispatch(appendAnecdote(newAnecdote))
+  }
+}
 
 
+export const initializeAnecdotes = () => {
+  return async dispatch => {
+    const anecdotes = await anecdoteService.getAll()
+    dispatch(setAnecdotes(anecdotes))
+  }
+}
+
+export const voteAnecdoteReducer = content => {
+
+  console.log('this is content in vote', content)
+
+  return async dispatch => {
+    const voteForAnecdoteVariable = await anecdoteService.changeAnecdote(content)
+
+    dispatch(vote(content))
+    console.log('PUT req was operated dont know if works correctly')
+  }
+
+}
 
 
 

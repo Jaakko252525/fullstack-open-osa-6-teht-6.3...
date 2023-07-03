@@ -31,7 +31,6 @@ const AnecdoteForm = ({formSubmitProp, valueProp }) => {
         // sending input text to asObject
         dispatch(createAnecdote(anecdoteText))
 
-        anecdoteService.createNew(anecdoteText)
 
         setAddedAnecdote(true)
         //setting state for rendering
